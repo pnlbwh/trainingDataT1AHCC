@@ -4,7 +4,7 @@ SCRIPT=$(readlink -m $(type -p "$0"))
 SCRIPTDIR=${SCRIPT%/*}      
 
 usage() {
-    echo -e "Makes 'trainingData.csv'
+    echo -e "Makes 'trainingDataT1AHCC.csv'
 Usage: 
     ${1##*/} [<dir>]
 
@@ -12,8 +12,10 @@ Usage:
     "
 }
 
+[ $# -gt 0 ] || { usage; exit 0; }
+
 if [ $# -gt 0 ]; then 
-    [[ "$1" != "-h" ]] || { usage; exit 0; }
+    [[ "${1-}" != "-h" ]] || { usage; exit 0; }
     dir=$1
 fi
 
@@ -24,5 +26,6 @@ ls -1 $datadir/*cingr.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/cingr.txt
 ls -1 $datadir/*amyhipl.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/amyhipl.txt
 ls -1 $datadir/*amyhipr.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/amyhipr.txt
 ls -1 $datadir/*realign.cent.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/t1s.txt
-paste -d, $dirTmp/t1s.txt $dirTmp/cingl.txt $dirTmp/cingr.txt $dirTmp/amyhipl.txt $dirTmp/amyhipr.txt > $dir/trainingDataT1AHCC.csv
+ls -1 $datadir/*realign-mask.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/masks.txt
+paste -d, $dirTmp/t1s.txt $dirTmp/masks.txt $dirTmp/cingl.txt $dirTmp/cingr.txt $dirTmp/amyhipl.txt $dirTmp/amyhipr.txt > $dir/trainingDataT1AHCC.csv
 rm -r "$dirTmp"
