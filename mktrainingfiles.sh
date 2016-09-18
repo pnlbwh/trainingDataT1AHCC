@@ -4,7 +4,7 @@ SCRIPT=$(readlink -m $(type -p "$0"))
 SCRIPTDIR=${SCRIPT%/*}      
 
 usage() {
-    echo -e "Makes 'trainingData.csv'
+    echo -e "Makes 'trainingDataT1AHCC.csv'
 Usage: 
     ${1##*/} [<dir>]
 
@@ -12,8 +12,10 @@ Usage:
     "
 }
 
+[ $# -gt 0 ] || { usage; exit 0; }
+
 if [ $# -gt 0 ]; then 
-    [[ "$1" != "-h" ]] || { usage; exit 0; }
+    [[ "${1-}" != "-h" ]] || { usage; exit 0; }
     dir=$1
 fi
 
