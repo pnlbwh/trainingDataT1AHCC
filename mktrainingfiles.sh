@@ -26,5 +26,6 @@ ls -1 $datadir/*cingr.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/cingr.txt
 ls -1 $datadir/*amyhipl.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/amyhipl.txt
 ls -1 $datadir/*amyhipr.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/amyhipr.txt
 ls -1 $datadir/*realign.cent.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/t1s.txt
-paste -d, $dirTmp/t1s.txt $dirTmp/cingl.txt $dirTmp/cingr.txt $dirTmp/amyhipl.txt $dirTmp/amyhipr.txt > $dir/trainingDataT1AHCC.csv
+ls -1 $datadir/*realign-mask.nrrd | sed "s|.*\/|$datadir|" > $dirTmp/masks.txt
+paste -d, $dirTmp/t1s.txt $dirTmp/masks.txt $dirTmp/cingl.txt $dirTmp/cingr.txt $dirTmp/amyhipl.txt $dirTmp/amyhipr.txt > $dir/trainingDataT1AHCC.csv
 rm -r "$dirTmp"
