@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash
 
 SCRIPT=$(readlink -m $(type -p "$0"))
 SCRIPTDIR=${SCRIPT%/*}      
@@ -6,9 +6,9 @@ SCRIPTDIR=${SCRIPT%/*}
 usage() {
     echo -e "Makes 'trainingDataT1AHCC.csv'
 Usage: 
-    ${1##*/} [<dir>]
+    ${0##*/} [<dir>]
 
-    <dir>   output directory (default: current directory)
+    <dir>   output directory for csv files
     "
 }
 
